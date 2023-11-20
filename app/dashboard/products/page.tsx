@@ -46,7 +46,7 @@ const ProductsPage = () => {
             <td>72</td>
             <td>
               <div className="flex gap-2 ">
-                <Link href={""}>
+                <Link href={"/dashboard/products/test"}>
                   <button>View</button>
                 </Link>
 
