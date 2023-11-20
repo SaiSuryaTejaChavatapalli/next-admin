@@ -1,10 +1,13 @@
 import Pagination from "@/app/_components/Pagination";
 import SearchComp from "@/app/_components/SearchComp";
+import { fetchUsers } from "@/app/lib/data";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
 
-const UsersPage = () => {
+const UsersPage = async () => {
+  const users = await fetchUsers();
+  console.log("Users", users);
   return (
     <div className="bg-slate-300 p-5 rounded-lg mt-5">
       <div className="flex items-center justify-between">
