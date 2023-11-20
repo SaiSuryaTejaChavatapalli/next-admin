@@ -46,7 +46,7 @@ const UsersPage = () => {
             <td>Active</td>
             <td>
               <div className="flex gap-2 ">
-                <Link href={""}>
+                <Link href={"/"}>
                   <button>View</button>
                 </Link>
 
