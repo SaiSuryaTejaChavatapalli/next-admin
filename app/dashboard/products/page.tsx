@@ -1,15 +1,17 @@
 import Pagination from "@/app/_components/Pagination";
 import SearchComp from "@/app/_components/SearchComp";
+import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import Link from "next/link";
 
 const ProductsPage = () => {
   return (
     <div className="bg-slate-300 p-5 rounded-lg mt-5">
       <div className="flex items-center justify-between">
         <SearchComp placeholder="Search for a product..." />
-        <button className="p-2 rounded-lg bg-purple-700 text-white">
-          Add New
-        </button>
+        <Link href={"/dashboard/products/add"}>
+          <Button className="p-2 rounded-lg  text-white">Add New</Button>
+        </Link>
       </div>
       <table className="w-full mt-5">
         <thead>
@@ -44,7 +46,10 @@ const ProductsPage = () => {
             <td>72</td>
             <td>
               <div className="flex gap-2 ">
-                <button>View</button>
+                <Link href={""}>
+                  <button>View</button>
+                </Link>
+
                 <button>Delete</button>
               </div>
             </td>
