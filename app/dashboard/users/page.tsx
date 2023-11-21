@@ -12,7 +12,7 @@ type UsersPageProps = {
 const UsersPage = async ({ searchParams }: UsersPageProps) => {
   const q = searchParams?.q || "";
   const page = searchParams?.page || "1";
-  console.log("QQ", q);
+
   const users = await fetchUsers(q, page);
 
   return (
