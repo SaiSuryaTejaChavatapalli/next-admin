@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import Image from "next/image";
-
+import noAvatar from "@/public/no-avatar.png";
 const UserPage = async ({
   params,
 }: {
@@ -24,20 +24,20 @@ const UserPage = async ({
   const user = await fetchUser(params.userId);
   return (
     <div className="flex gap-4">
-      <div className="w-1/4">
+      <div className="w-2/5">
         <Image
-          src={user.img}
+          src={user.img || noAvatar}
           alt="userImg"
           width={"200"}
           height={"200"}
-          className="w-full h-80 object-cover"
+          className="w-full h-full h-1/2 p-3 object-cover"
         />
       </div>
 
-      <div className="flex flex-col w-3/4">
-        <form action={updateUser}>
+      <div className="flex flex-col w-3/5">
+        <form action={updateUser} className="flex flex-col gap-2">
           <div>
-            <Label htmlFor="username">UserName</Label>
+            <Label htmlFor="username">User Name</Label>
             <Input type="text" name="username" placeholder={user.username} />
           </div>
           <div>
@@ -45,21 +45,21 @@ const UserPage = async ({
             <Input type="text" name="email" placeholder={user.email} />
           </div>
           <div>
-            <Label htmlFor="phone">Phone</Label>
-            <Input type="number" name="phone" placeholder={user.phone} />
-          </div>
-          <div>
             <Label htmlFor="password">Password</Label>
             <Input type="text" name="password" />
+          </div>
+          <div>
+            <Label htmlFor="phone">Phone</Label>
+            <Input type="number" name="phone" placeholder={user.phone} />
           </div>
 
           <div>
             <Label htmlFor="isAdmin">Is Admin?</Label>
-            <Select>
-              <SelectTrigger className={""}>
+            <Select name="isAdmin">
+              <SelectTrigger>
                 <SelectValue placeholder="IsAdmin" />
               </SelectTrigger>
-              <SelectContent className=" ">
+              <SelectContent>
                 <SelectGroup>
                   <SelectItem value="true">Yes</SelectItem>
                   <SelectItem value="false">No</SelectItem>
@@ -69,11 +69,11 @@ const UserPage = async ({
           </div>
           <div>
             <Label htmlFor="isActive">Is Active?</Label>
-            <Select>
-              <SelectTrigger className={""}>
+            <Select name="isActive">
+              <SelectTrigger>
                 <SelectValue placeholder="IsActive" />
               </SelectTrigger>
-              <SelectContent className=" ">
+              <SelectContent>
                 <SelectGroup>
                   <SelectItem value="true">Yes</SelectItem>
                   <SelectItem value="false">No</SelectItem>
@@ -81,6 +81,17 @@ const UserPage = async ({
               </SelectContent>
             </Select>
           </div>
+          <div>
+            <Label htmlFor="address">Address</Label>
+            <Textarea
+              name="address"
+              placeholder="Address"
+              id="address"
+              rows={6}
+              className="w-full"
+            />
+          </div>
+
           <div>
             <input type="hidden" value={user.id} name="id" />
           </div>

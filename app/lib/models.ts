@@ -30,7 +30,7 @@ const userSchema = new mongoose.Schema(
       default: true,
     },
     phone: {
-      type: String,
+      type: Number,
     },
     address: {
       type: String,
@@ -50,6 +50,9 @@ const productSchema = new mongoose.Schema(
     },
     description: {
       required: true,
+      type: String,
+    },
+    category: {
       type: String,
     },
     price: {

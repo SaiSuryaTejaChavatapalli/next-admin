@@ -11,8 +11,7 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { addUser } from "../../../lib/actions";
-import Link from "next/link";
-import { handleClientScriptLoad } from "next/script";
+
 const widthItem = "w-[45%]";
 const AddUserPage = () => {
   return (
@@ -20,25 +19,25 @@ const AddUserPage = () => {
       <form action={addUser} className="flex flex-wrap gap-3 justify-between">
         <Input
           type="text"
-          placeholder="username"
+          placeholder="Username"
           name="username"
           className={widthItem}
         />
         <Input
           type="text"
-          placeholder="email"
+          placeholder="Email"
           name="email"
           className={widthItem}
         />
         <Input
           type="text"
-          placeholder="password"
+          placeholder="Password"
           name="password"
           className={widthItem}
         />
         <Input
           type="text"
-          placeholder="phone"
+          placeholder="Phone Number"
           name="phone"
           className={widthItem}
         />
@@ -46,7 +45,7 @@ const AddUserPage = () => {
           <SelectTrigger className={widthItem}>
             <SelectValue placeholder="Is Admin?" />
           </SelectTrigger>
-          <SelectContent className=" ">
+          <SelectContent>
             <SelectGroup>
               <SelectItem value={"true"}>Yes</SelectItem>
               <SelectItem value={"false"}>No</SelectItem>
@@ -57,7 +56,7 @@ const AddUserPage = () => {
           <SelectTrigger className={widthItem}>
             <SelectValue placeholder="Is Active?" />
           </SelectTrigger>
-          <SelectContent className=" ">
+          <SelectContent>
             <SelectGroup>
               <SelectItem value={"true"}>Yes</SelectItem>
               <SelectItem value={"false"}>No</SelectItem>

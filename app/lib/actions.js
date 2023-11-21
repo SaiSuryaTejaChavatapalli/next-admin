@@ -1,22 +1,21 @@
 "use server";
 import { revalidatePath } from "next/cache";
-import { User } from "./models";
+import { Product, User } from "./models";
 import { connectToDB } from "./utils";
 import { redirect } from "next/navigation";
 export const addUser = async (formData) => {
   const { username, email, password, phone, address, isAdmin, isActive } =
     Object.fromEntries(formData);
-
   try {
     await connectToDB();
     const newUser = new User({
       username,
       email,
       password,
-      phone,
+      phone: parseInt(phone),
       address,
-      isAdmin,
-      isActive,
+      isAdmin: JSON.parse(isAdmin.toLowerCase()),
+      isActive: JSON.parse(isActive.toLowerCase()),
     });
     await newUser.save();
   } catch (error) {
@@ -40,27 +39,62 @@ export const deleteUser = async (formData) => {
 export const updateUser = async (formData) => {
   const { id, username, email, password, phone, address, isAdmin, isActive } =
     Object.fromEntries(formData);
+
   const updateFields = {
     username,
     email,
     password,
-    phone,
+    phone: parseInt(phone),
     address,
-    isAdmin,
-    isActive,
+    isAdmin: JSON.parse(isAdmin.toLowerCase()),
+    isActive: JSON.parse(isActive.toLowerCase()),
   };
-  console.log("updateFieldsBefore", updateFields);
+
   Object.keys(updateFields).forEach((key) => {
     if (updateFields[key] === "" || undefined) {
       delete updateFields[key];
     }
   });
   try {
-    console.log({ id, updateFields });
     await User.findByIdAndUpdate(id, updateFields);
   } catch (error) {
     console.log("Failed to update User");
     throw new Error("Failed to update User");
   }
   revalidatePath("/dashboard/users");
+};
+
+export const addProduct = async (formData) => {
+  console.log("AddProduct Formdata", formData);
+  const { title, category, price, stock, size, color, description } =
+    Object.fromEntries(formData);
+
+  try {
+    connectToDB();
+    const newProduct = new Product({
+      title,
+      category,
+      price: parseInt(price),
+      stock: parseInt(stock),
+      size,
+      color,
+      description,
+    });
+    await newProduct.save();
+  } catch (error) {
+    console.log("Failed to add products", error);
+  }
+  revalidatePath("/dashboard/products");
+  redirect("/dashboard/products");
+};
+
+export const deleteProduct = async (formData) => {
+  const { id } = Object.fromEntries(formData);
+  try {
+    connectToDB();
+    await Product.findByIdAndDelete(id);
+  } catch (error) {
+    console.log("Failed to delete product", error);
+  }
+  revalidatePath("/dashboard/products");
 };
