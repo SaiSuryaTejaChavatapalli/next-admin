@@ -56,7 +56,7 @@ export function ProductsTable({ rowData }) {
 
             <TableCell>
               <div className="flex gap-2 ">
-                <Link href={`/dashboard/users/${product.id}`}>
+                <Link href={`/dashboard/products/${product.id}`}>
                   <Button>View</Button>
                 </Link>
                 <form action={deleteProduct}>

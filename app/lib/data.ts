@@ -38,3 +38,13 @@ export const fetchProducts = async () => {
     console.log("Failed to fetch Products", error);
   }
 };
+
+export const fetchProduct = async (id) => {
+  try {
+    connectToDB();
+    const product = await Product.findById(id);
+    return product;
+  } catch (error) {
+    console.log("Failed to fetch Product", error);
+  }
+};
