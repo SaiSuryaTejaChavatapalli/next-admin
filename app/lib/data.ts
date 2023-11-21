@@ -19,3 +19,13 @@ export const fetchUsers = async (q, page) => {
     console.log(error);
   }
 };
+
+export const fetchUser = async (id) => {
+  try {
+    connectToDB();
+    const user = await User.findById(id);
+    return user;
+  } catch (error) {
+    console.log("Error while fetching user", error);
+  }
+};

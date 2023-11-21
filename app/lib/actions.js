@@ -36,3 +36,31 @@ export const deleteUser = async (formData) => {
   }
   revalidatePath("/dashboard/users");
 };
+
+export const updateUser = async (formData) => {
+  const { id, username, email, password, phone, address, isAdmin, isActive } =
+    Object.fromEntries(formData);
+  const updateFields = {
+    username,
+    email,
+    password,
+    phone,
+    address,
+    isAdmin,
+    isActive,
+  };
+  console.log("updateFieldsBefore", updateFields);
+  Object.keys(updateFields).forEach((key) => {
+    if (updateFields[key] === "" || undefined) {
+      delete updateFields[key];
+    }
+  });
+  try {
+    console.log({ id, updateFields });
+    await User.findByIdAndUpdate(id, updateFields);
+  } catch (error) {
+    console.log("Failed to update User");
+    throw new Error("Failed to update User");
+  }
+  revalidatePath("/dashboard/users");
+};
