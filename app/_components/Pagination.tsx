@@ -1,8 +1,11 @@
+"use client";
 const Pagination = () => {
+  const handlePrevious = () => {};
+  const handleNext = () => {};
   return (
     <div className="p-3 flex justify-between">
-      <button>Previous</button>
-      <button>Next</button>
+      <button onClick={handlePrevious}>Previous</button>
+      <button onClick={handleNext}>Next</button>
     </div>
   );
 };

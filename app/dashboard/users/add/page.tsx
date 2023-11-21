@@ -10,12 +10,14 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-
+import { addUser } from "../../../lib/actions";
+import Link from "next/link";
+import { handleClientScriptLoad } from "next/script";
 const widthItem = "w-[45%]";
 const AddUserPage = () => {
   return (
     <div className="p-5 mt-5">
-      <form action="" className="flex flex-wrap gap-3 justify-between">
+      <form action={addUser} className="flex flex-wrap gap-3 justify-between">
         <Input
           type="text"
           placeholder="username"
@@ -36,8 +38,8 @@ const AddUserPage = () => {
         />
         <Input
           type="text"
-          placeholder="phonenumber"
-          name="phonenumber"
+          placeholder="phone"
+          name="phone"
           className={widthItem}
         />
         <Select name="isAdmin">
@@ -70,6 +72,7 @@ const AddUserPage = () => {
           rows={10}
           className="w-full"
         />
+
         <Button type="submit" className="w-full p-7">
           Submit
         </Button>
