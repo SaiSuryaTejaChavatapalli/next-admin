@@ -5,6 +5,7 @@ import { Label } from "@/components/ui/label";
 import { authenticate } from "../lib/actions";
 //import { useState } from "react";
 import { useFormState } from "react-dom";
+import Link from "next/link";
 
 const LoginForm = () => {
   const [state, formAction] = useFormState(authenticate, undefined);
@@ -21,7 +22,7 @@ const LoginForm = () => {
         action={formAction}
         className="flex flex-col gap-3 items-center bg-slate-300 p-24 rounded-lg"
       >
-        <h1 className="text-3xl font-bold">Login</h1>
+        <h1 className="text-3xl font-bold">Sign In</h1>
         <div>
           <Label>Email</Label>
           <Input type="email" name="email" />
@@ -30,9 +31,12 @@ const LoginForm = () => {
           <Label>Password</Label>
           <Input type="password" name="password" />
         </div>
-        <Button className="w-full">Login</Button>
+        <Button className="w-full">Sign In</Button>
         {/* <div className="text-red-500">{errorMsg ? errorMsg : null}</div> */}
         <div className="text-red-500">{state ? state : null}</div>
+        <Link href={"/sign-up"}>
+          <Button variant={"link"}>Sign Up?</Button>
+        </Link>
       </form>
     </div>
   );

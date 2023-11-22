@@ -141,3 +141,13 @@ export const authenticate = async (prevState, formData) => {
     throw error;
   }
 };
+
+export const signUpUser = (formData) => {
+  const { username, email, password } = Object.fromEntries(formData);
+  try {
+    const user = new User({ username, email, password });
+    user.save();
+  } catch (error) {
+    console.log("Failed to create User", error);
+  }
+};

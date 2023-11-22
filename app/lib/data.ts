@@ -19,7 +19,7 @@ export const fetchUsers = async (q, page) => {
   }
 };
 
-export const fetchUser = async (id) => {
+export const fetchUser = async (id: string) => {
   try {
     connectToDB();
     const user = await User.findById(id);
@@ -39,7 +39,7 @@ export const fetchProducts = async () => {
   }
 };
 
-export const fetchProduct = async (id) => {
+export const fetchProduct = async (id: string) => {
   try {
     connectToDB();
     const product = await Product.findById(id);
