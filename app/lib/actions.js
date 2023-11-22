@@ -3,6 +3,8 @@ import { revalidatePath } from "next/cache";
 import { Product, User } from "./models";
 import { connectToDB } from "./utils";
 import { redirect } from "next/navigation";
+import { signIn } from "@/auth";
+import { startTransition } from "react";
 export const addUser = async (formData) => {
   const { username, email, password, phone, address, isAdmin, isActive } =
     Object.fromEntries(formData);
@@ -125,4 +127,17 @@ export const updateProduct = async (formData) => {
   }
   revalidatePath("/dashboard/products");
   redirect("/dashboard/products");
+};
+
+export const authenticate = async (prevState, formData) => {
+  const { email, password } = Object.fromEntries(formData);
+  try {
+    await signIn("credentials", { email, password });
+  } catch (error) {
+    console.log("ErrorMsg", error.message);
+    if (error.message.includes("CredentialsSignin")) {
+      return "Wrong Credentials";
+    }
+    throw error;
+  }
 };
