@@ -33,11 +33,6 @@ const menuItems = [
         path: "/dashboard/products",
         icon: <MdShoppingBag />,
       },
-      {
-        title: "Transactions",
-        path: "/dashboard/transactions",
-        icon: <MdAttachMoney />,
-      },
     ],
   },
   {
@@ -81,7 +76,7 @@ const Sidebar = async () => {
   const user = await auth();
   console.log("User from sidebar", user);
   return (
-    <div className="mx-2 p-2 bg-slate-200 ">
+    <div className="mx-2 p-2">
       <div className="flex items-center gap-5 mb-5">
         <Image
           className="rounded-full object-cover"

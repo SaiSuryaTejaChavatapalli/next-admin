@@ -50,7 +50,7 @@ const UserPage = async ({
           </div>
           <div>
             <Label htmlFor="phone">Phone</Label>
-            <Input type="number" name="phone" placeholder={user.phone} />
+            <Input type="text" name="phone" placeholder={user.phone} />
           </div>
 
           <div>

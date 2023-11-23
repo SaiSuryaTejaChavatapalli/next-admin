@@ -4,17 +4,17 @@ import { Product, User } from "./models";
 import { connectToDB } from "./utils";
 import { redirect } from "next/navigation";
 import { signIn } from "@/auth";
-import { startTransition } from "react";
+
 export const addUser = async (formData) => {
   const { username, email, password, phone, address, isAdmin, isActive } =
-    Object.fromEntries(formData);
+    formData;
   try {
     await connectToDB();
     const newUser = new User({
       username,
       email,
       password,
-      phone: parseInt(phone),
+      phone: phone,
       address,
       isAdmin: JSON.parse(isAdmin.toLowerCase()),
       isActive: JSON.parse(isActive.toLowerCase()),
@@ -41,22 +41,33 @@ export const deleteUser = async (formData) => {
 export const updateUser = async (formData) => {
   const { id, username, email, password, phone, address, isAdmin, isActive } =
     Object.fromEntries(formData);
-
+  console.log("update Fileds before", {
+    id,
+    username,
+    email,
+    password,
+    phone,
+    address,
+    isAdmin,
+    isActive,
+  });
   const updateFields = {
     username,
     email,
     password,
-    phone: parseInt(phone),
+    phone,
     address,
-    isAdmin: JSON.parse(isAdmin.toLowerCase()),
-    isActive: JSON.parse(isActive.toLowerCase()),
+    isAdmin,
+    isActive,
   };
-
+  console.log("update Fields after", updateFields);
   Object.keys(updateFields).forEach((key) => {
     if (updateFields[key] === "" || undefined) {
       delete updateFields[key];
     }
   });
+  console.log("update Fields after eliminating", updateFields);
+
   try {
     await User.findByIdAndUpdate(id, updateFields);
   } catch (error) {
@@ -130,7 +141,7 @@ export const updateProduct = async (formData) => {
 };
 
 export const authenticate = async (prevState, formData) => {
-  const { email, password } = Object.fromEntries(formData);
+  const { email, password } = formData;
   try {
     await signIn("credentials", { email, password });
   } catch (error) {
