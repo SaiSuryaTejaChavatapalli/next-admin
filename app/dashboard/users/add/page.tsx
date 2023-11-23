@@ -40,10 +40,6 @@ const AddUserPage = () => {
     resolver: zodResolver(userAddFormSchema),
   });
 
-  const {
-    formState: { errors },
-  } = form;
-
   const handleAddUserForm = (data: z.infer<typeof userAddFormSchema>) => {
     console.log("FormData", data);
     addUser(data);
