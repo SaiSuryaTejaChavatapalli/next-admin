@@ -74,7 +74,9 @@ export const updateUser = async (formData) => {
     console.log("Failed to update User");
     throw new Error("Failed to update User");
   }
+
   revalidatePath("/dashboard/users");
+  redirect("/dashboard/users");
 };
 
 export const addProduct = async (formData) => {
@@ -153,7 +155,7 @@ export const authenticate = async (prevState, formData) => {
 };
 
 export const signUpUser = (formData) => {
-  const { username, email, password } = Object.fromEntries(formData);
+  const { username, email, password } = formData;
   try {
     const user = new User({ username, email, password });
     user.save();

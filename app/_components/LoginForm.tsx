@@ -31,7 +31,7 @@ const LoginForm = () => {
     <div className="flex flex-col items-center justify-center h-screen ">
       <form
         onSubmit={handleSubmit(formAction)}
-        className="flex flex-col gap-3 items-center bg-slate-300 p-24 rounded-lg"
+        className="flex flex-col gap-3  bg-slate-300 p-24 rounded-lg"
       >
         <h1 className="text-3xl font-bold">Sign In</h1>
         <div>
