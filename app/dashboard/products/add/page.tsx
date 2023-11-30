@@ -23,7 +23,7 @@ import { addProduct } from "../../../lib/actions";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-export const productAddFormSchema = z.object({
+const productAddFormSchema = z.object({
   title: z.string(),
   price: z.string(),
   stock: z.string(),
